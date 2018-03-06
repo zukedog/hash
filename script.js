@@ -3,13 +3,20 @@ function doclick() {
     times++;
     location.hash = times;
 }
-window.onhashchange = function() {  
- 	temp = myLibrary.joinArray(location.hash.split("#"));
-	$("body").load("SubPages/"+temp+".html");
-	console.log(temp+".html");
 
+window.onhashchange = function() {  
+ 	hashChange();
 };
 
+function hashChange(){
+	hash = myLibrary.joinArray(location.hash.split("#"));
+	if(hash==""){
+		hash="index";
+	}
+	hash += ".html";
+	console.log(hash);
+}
+hashChange();
 
 
 
@@ -21,4 +28,17 @@ function inArray(par, arr){
 	}
 	
 	return false;
+}
+
+
+function getBodyHTML(file){
+	$.ajax({
+			
+			url: file, dataType:"text", async: false, 
+			success: function(result){
+            console.log(result);
+			
+			
+			}
+		});
 }
