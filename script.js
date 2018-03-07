@@ -1,7 +1,5 @@
-var times=0;
 function doclick() {
-    times++;
-    location.hash = times;
+    location.hash = 2;
 }
 
 window.onhashchange = function() {  
@@ -19,28 +17,11 @@ function hashChange(){
 }
 hashChange();
 
-
-
-function inArray(par, arr){
-	for(var i=0; i<arr.length; i++){
-		if (arr[i]==par){
-			return true;
-		}	
-	}
-	
-	return false;
-}
-
-
 function getBodyHTML(file){
 	$.ajax({
-			
-			url: file, dataType:"text", async: false, 
-			success: function(result){
-
-            alert(result);
-			
-			
-			}
-		});
+		url: file, dataType:"text", async: false, 
+		success: function(result){
+			$("body").html(result.split("<body>")[1].split("</body>")[0]);
+		}
+	});
 }
