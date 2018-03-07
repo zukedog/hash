@@ -14,7 +14,8 @@ function hashChange(){
 		hash="index";
 	}
 	hash += ".html";
-	console.log(hash);
+	console.log("Filename = "+hash);
+	getBodyHTML(hash);
 }
 hashChange();
 
@@ -36,7 +37,8 @@ function getBodyHTML(file){
 			
 			url: file, dataType:"text", async: false, 
 			success: function(result){
-            console.log(result);
+
+            alert(result);
 			
 			
 			}
