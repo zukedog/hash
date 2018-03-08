@@ -11,7 +11,7 @@ var hash = {
 	},
 	
 	onChange: function(){
-		var curentHash = myLibrary.joinArray(location.hash.split("#"));
+		var curentHash = this.joinArray(location.hash.split("#"));
 		if(curentHash==""){
 			curentHash="index";
 		}
@@ -21,6 +21,14 @@ var hash = {
 	
 	set: function(value){
 		location.hash=value;
+	},
+	
+	joinArray: function(arr){//adds the contents of an array together
+		var final ="";
+		for(var i=0; i<arr.length; i++){
+			final += arr[i];
+		}
+		return final;
 	},
 	
 	processHTML: function(file){
