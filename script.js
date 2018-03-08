@@ -2,26 +2,34 @@ function doclick() {
     location.hash = 2;
 }
 
-window.onhashchange = function() {  
- 	hashChange();
-};
-
-function hashChange(){
-	hash = myLibrary.joinArray(location.hash.split("#"));
-	if(hash==""){
-		hash="index";
-	}
-	hash += ".html";
-	console.log("Filename = "+hash);
-	getBodyHTML(hash);
-}
-hashChange();
-
-function getBodyHTML(file){
-	$.ajax({
-		url: file, dataType:"text", async: false, 
-		success: function(result){
-			$("body").html(result.split("<body>")[1].split("</body>")[0]);
+var hash = {
+	init: function(){
+		var hash = this;
+		window.onhashchange = function() {  
+ 			hash.onChange();
+		};
+	},
+	
+	onChange: function(){
+		var curentHash = myLibrary.joinArray(location.hash.split("#"));
+		if(curentHash==""){
+			curentHash="index";
 		}
-	});
-}
+		curentHash += ".html";
+		this.processHTML(curentHash);
+	},
+	
+	set: function(value){
+		location.hash=value;
+	},
+	
+	processHTML: function(file){
+		$.ajax({
+			url: file, dataType:"text", async: false, 
+			success: function(result){
+				$("body").html(result.split("<body>")[1].split("</body>")[0]);
+			}
+		});
+	}
+};
+hash.init();
